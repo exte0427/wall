@@ -1,4 +1,5 @@
 $("canvas").attr("height",window.innerHeight); //sad
+$("#point_pointer").css("top",610+"px"); 
 const blocks=[];
 let bolld=[];
 let blocksX=[];
