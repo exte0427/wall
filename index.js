@@ -1,4 +1,4 @@
-$("canvas").attr("height",window.innerHeight);
+$("canvas").attr("height",window.innerHeight); //sad
 const blocks=[];
 let bolld=[];
 let blocksX=[];
