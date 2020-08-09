@@ -220,11 +220,11 @@ setInterval(()=>{
     });
 },5);
 onmousemove = function(e){mx= e.clientX,my= e.clientY}
-const next=()=>{
+const next=(a)=>{
     const count=random(6,3);
     let ps=[];
         for(let i=0;i<blocksY.length;i++){
-            if(blocksY[i]==0){
+            if(blocksY[i]==-50){
                 ps.push(blocksX[i]);
             }
     }
@@ -261,6 +261,11 @@ const next=()=>{
         a.next();
     })
     stage++;
+    if(stage>0 && a!="wa"){
+        setTimeout(()=>{
+            next("wa");
+        },450);
+    }
 }
 let mu=0;
 $( "body" ).mouseup(function() {
