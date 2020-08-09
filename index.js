@@ -589,7 +589,7 @@ class add_boll{
     del(){
         this.deeeel=1;
         bollNum++;
-        for(let i=0;i<10;i++){
+        for(let i=0;i<6;i++){
             patys.push(new paty(this.x,this.y,"6FF48A"));
         }
     }
