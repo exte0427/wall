@@ -1,0 +1,18 @@
+-------------------- Auto-Git Log --------------------
+		Sun Aug 09 2020 18:21:25 GMT+0900 (Korean Standard Time)
+------------------------------------------------------
+
+Modified files:
+* index.html
+* index.js
+* style.css
+
+
+Created files:
+* .autogit/logs/log-9-7-2020-17-13-50.txt
+
+
+Deleted files:
+
+
+Renamed files:

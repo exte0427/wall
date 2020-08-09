@@ -644,27 +644,42 @@ class add_boll{
     }
 }
 next();
-/*const html=vars=>{
-    let name=Object.keys(vars);
-    setInterval(()=>{
-        name.map(a=>{
-            document.getElementsByTagName(a)[0].innerHTML=eval(a);
-        });
-    },10);
-}*/
-String.prototype.strcut = function(a,b){
-    let returnSTR="";
-    for(let i=a;i<=b;i++){
-        returnSTR=returnSTR+this.charAt(i);
+//
+let wa=10;
+document.write("{{wa}}");
+//
+const getVal=()=>{
+    String.prototype.strcut = function(a,b){
+        let returnSTR="";
+        for(let i=a;i<=b;i++){
+            returnSTR=returnSTR+this.charAt(i);
+        }
+        return returnSTR;
     }
-    return returnSTR;
-}
-(()=>{
     let htmls=document.getElementsByTagName("html")[0].innerHTML;
     let vals=[];
-    while(htmls.indexOf("<")!=-1){
-        vals.push(htmls.charAt(htmls.indexOf("<")));
-        htmls=htmls.replace("<","").replace("");
+    while(htmls.indexOf("{{")!=-1){
+        let i;
+        for(i=htmls.indexOf("{{")+1;htmls.charAt(i)+htmls.charAt(i+1)!="}}";i++){}
+        console.log(htmls.strcut(htmls.indexOf("{{")+2,i-1))
+        if(htmls.strcut(htmls.indexOf("{{")+2,i-1).startsWith("/")==0 && htmls.strcut(htmls.indexOf("{{")+2,i-1).indexOf(" ")==-1){
+            try{
+                console.log(htmls.strcut(htmls.indexOf("{{")+2,i-1))
+                eval(htmls.strcut(htmls.indexOf("{{")+2,i-1));
+                document.getElementsByTagName("html")[0].innerHTML=document.getElementsByTagName("html")[0].innerHTML.replace(`{{${htmls.strcut(htmls.indexOf("{{")+2,i-1)}}}`,`<${htmls.strcut(htmls.indexOf("{{")+2,i-1)}/>`);
+                vals.push(htmls.strcut(htmls.indexOf("{{")+2,i-1));
+            }catch(err){
+                console.log(err)
+            }
+        }
+        htmls=htmls.replace(`{{`,"");
     }
-})
-//html({score});
+    return vals;
+}
+const vals=getVal();
+setInterval(()=>{
+    vals.map(a=>{
+        console.log(a);
+        document.getElementsByTagName(a)[0].innerHTML=eval(a);
+    });
+},10);
