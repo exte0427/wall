@@ -1,6 +1,6 @@
 $("canvas").attr("height",window.innerHeight); //sad
 $("#point_pointer").css("top",610+"px"); 
-import("https://cdn.jsdelivr.net/gh/exte0427/betterHTML/code.js");
+import("https://cdn.jsdelivr.net/gh/exte0427/betterhtmljs/code.js");
 const blocks=[];
 let rank=1;
 let ops=1;
@@ -72,7 +72,7 @@ setInterval(()=>{
             jsonp : "callback",
         });
     }
-},200);
+},1000);
 let bolld=[];
 let lastbollplus=-1;
 let addbolls=[];
