@@ -261,7 +261,7 @@ const next=(a)=>{
         a.next();
     })
     stage++;
-    if(stage>0 && a!="wa"){
+    if(stage>10 && a!="wa"){
         setTimeout(()=>{
             next("wa");
         },450);

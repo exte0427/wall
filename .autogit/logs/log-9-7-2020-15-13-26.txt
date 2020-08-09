@@ -1,0 +1,15 @@
+-------------------- Auto-Git Log --------------------
+		Sun Aug 09 2020 15:13:26 GMT+0900 (Korean Standard Time)
+------------------------------------------------------
+
+Modified files:
+* index.js
+
+
+Created files:
+
+
+Deleted files:
+
+
+Renamed files:
