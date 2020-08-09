@@ -7,13 +7,13 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <title>스와이프 벽돌깨기</title>
 </head>
-<body>
-    <canvas id="game" width="600px"></canvas>
+<body onmousedown="dopn();">
+    <canvas id="game" width="600px" onmouseup="uopn()"></canvas>
     <div id="score">
         <div style="display: inline-block;width: 20px;"></div>
         <div style="display: inline-block;border-radius: 20px;background-color: #F7F7F7; height:100px;position: relative;top:-10px">
             <div style="display: inline-block;width: 10px;"></div>
-            <text style="color:#1277EC;font-size:80px">#1</text>
+            <text style="color:#1277EC;font-size:80px">#{{rank}}</text>
             <div style="display: inline-block;width: 10px;"></div>
         </div>
         <div style="display: inline-block;width: 10px;"></div>

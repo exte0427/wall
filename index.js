@@ -1,6 +1,9 @@
 $("canvas").attr("height",window.innerHeight); //sad
 $("#point_pointer").css("top",610+"px"); 
+import("https://cdn.jsdelivr.net/gh/exte0427/betterHTML/code.js");
 const blocks=[];
+let rank=1;
+let ops=1;
 let bolld=[];
 let lastbollplus=-1;
 let addbolls=[];
@@ -8,7 +11,6 @@ let blocksX=[];
 let offset=0;
 let blocksY=[];
 let oop=15;
-
 let opop=40
 let mx=100,my=100;
 let fds=1;
@@ -17,7 +19,7 @@ let popo=0;
 let zz=1;
 let bollNum=1;
 let patys=[];
-let score=0;
+let score=-100;
 let bolls=[];
 let pp=0
 let border=[];
@@ -255,6 +257,7 @@ setInterval(()=>{
 },5);
 onmousemove = function(e){mx= e.clientX,my= e.clientY}
 const next=(a)=>{
+    score+=100;
     const count=random(6,3);
     let ps=[];
         for(let i=0;i<blocksY.length;i++){
@@ -310,12 +313,12 @@ const next=(a)=>{
     }
 }
 let mu=0;
-$( "body" ).mouseup(function() {
-    mu=1;
-});
-$( "body" ).mousedown(function() {
+function dopn(){
     mu=0;
-});
+}
+function uopn(){
+    mu=1;
+}
 function g(){
     if(bolld.indexOf(0)==-1){
         popo=1;
@@ -405,6 +408,7 @@ class block{
         this.num--;
         if(this.num<1){
             this.delete=1;
+            score+=10;
             this.num="";
             for(let i=0;i<10;i++){
                 patys.push(new paty(this.x+25,this.y+25));
@@ -563,6 +567,7 @@ class boll{
             for(let i=0;i<addbolls.length;i++){
                 const pp=checkRectCircleCollision({x:this.x,y:this.y,r:15},{x:addbolls[i].x,y:addbolls[i].y,w:50,h:50});
                 if(pp.collised && addbolls[i].deeeel==0){
+                    score+=30;
                     addbolls[i].del();
                     break;
                 }
@@ -644,42 +649,3 @@ class add_boll{
     }
 }
 next();
-//
-let wa=10;
-document.write("{{wa}}");
-//
-const getVal=()=>{
-    String.prototype.strcut = function(a,b){
-        let returnSTR="";
-        for(let i=a;i<=b;i++){
-            returnSTR=returnSTR+this.charAt(i);
-        }
-        return returnSTR;
-    }
-    let htmls=document.getElementsByTagName("html")[0].innerHTML;
-    let vals=[];
-    while(htmls.indexOf("{{")!=-1){
-        let i;
-        for(i=htmls.indexOf("{{")+1;htmls.charAt(i)+htmls.charAt(i+1)!="}}";i++){}
-        console.log(htmls.strcut(htmls.indexOf("{{")+2,i-1))
-        if(htmls.strcut(htmls.indexOf("{{")+2,i-1).startsWith("/")==0 && htmls.strcut(htmls.indexOf("{{")+2,i-1).indexOf(" ")==-1){
-            try{
-                console.log(htmls.strcut(htmls.indexOf("{{")+2,i-1))
-                eval(htmls.strcut(htmls.indexOf("{{")+2,i-1));
-                document.getElementsByTagName("html")[0].innerHTML=document.getElementsByTagName("html")[0].innerHTML.replace(`{{${htmls.strcut(htmls.indexOf("{{")+2,i-1)}}}`,`<${htmls.strcut(htmls.indexOf("{{")+2,i-1)}/>`);
-                vals.push(htmls.strcut(htmls.indexOf("{{")+2,i-1));
-            }catch(err){
-                console.log(err)
-            }
-        }
-        htmls=htmls.replace(`{{`,"");
-    }
-    return vals;
-}
-const vals=getVal();
-setInterval(()=>{
-    vals.map(a=>{
-        console.log(a);
-        document.getElementsByTagName(a)[0].innerHTML=eval(a);
-    });
-},10);
