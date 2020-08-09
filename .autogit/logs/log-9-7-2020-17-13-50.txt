@@ -1,0 +1,15 @@
+-------------------- Auto-Git Log --------------------
+		Sun Aug 09 2020 17:13:50 GMT+0900 (Korean Standard Time)
+------------------------------------------------------
+
+Modified files:
+* style.css
+
+
+Created files:
+
+
+Deleted files:
+
+
+Renamed files:

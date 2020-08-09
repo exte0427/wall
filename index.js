@@ -17,6 +17,7 @@ let popo=0;
 let zz=1;
 let bollNum=1;
 let patys=[];
+let score=0;
 let bolls=[];
 let pp=0
 let border=[];
@@ -643,3 +644,27 @@ class add_boll{
     }
 }
 next();
+/*const html=vars=>{
+    let name=Object.keys(vars);
+    setInterval(()=>{
+        name.map(a=>{
+            document.getElementsByTagName(a)[0].innerHTML=eval(a);
+        });
+    },10);
+}*/
+String.prototype.strcut = function(a,b){
+    let returnSTR="";
+    for(let i=a;i<=b;i++){
+        returnSTR=returnSTR+this.charAt(i);
+    }
+    return returnSTR;
+}
+(()=>{
+    let htmls=document.getElementsByTagName("html")[0].innerHTML;
+    let vals=[];
+    while(htmls.indexOf("<")!=-1){
+        vals.push(htmls.charAt(htmls.indexOf("<")));
+        htmls=htmls.replace("<","").replace("");
+    }
+})
+//html({score});

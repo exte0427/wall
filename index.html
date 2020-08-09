@@ -9,6 +9,16 @@
 </head>
 <body>
     <canvas id="game" width="600px"></canvas>
+    <div id="score">
+        <div style="display: inline-block;width: 20px;"></div>
+        <div style="display: inline-block;border-radius: 20px;background-color: #F7F7F7; height:100px;position: relative;top:-10px">
+            <div style="display: inline-block;width: 10px;"></div>
+            <text style="color:#1277EC;font-size:80px">#1</text>
+            <div style="display: inline-block;width: 10px;"></div>
+        </div>
+        <div style="display: inline-block;width: 10px;"></div>
+        <text style="color:#3A3A3A;font-size:100px"><score/></text><text style="color:#454B52">score</text>
+    </div>
     <div id="point_pointer" onmousedown="g();"></div>
     <script  src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="index.js"></script>

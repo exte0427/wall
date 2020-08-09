@@ -23,3 +23,8 @@ body{
     left: 240px;
     top:5px;
 }
+#score{
+    position: fixed;
+    top:0;
+    left:600px;
+}
