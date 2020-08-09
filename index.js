@@ -8,6 +8,7 @@ let blocksX=[];
 let offset=0;
 let blocksY=[];
 let oop=15;
+let nowwww=0;
 
 let opop=40
 let mx=100,my=100;
@@ -488,17 +489,20 @@ class boll{
         this.goingY=gy;
         let nmx=mx;
         const aa=setInterval(()=>{
-            if(this.x<10){
+            if(this.x<10 && now!=1){
                 lastyyy=-1;
                 this.xl*=-1;
+                now=1;
             }
-            if(this.x>590){
+            if(this.x>590&& now!=2){
                 lastyyy=-1;
                 this.xl*=-1;
+                now=2;
             }
-            if(this.y<10){
+            if(this.y<10&& now!=3){
                 lastyyy=-1;
                 this.yl*=-1;
+                now=3;
             }if(this.y>650){
                 if(fd==3){
                     let ppp=0;
@@ -539,6 +543,7 @@ class boll{
             for(let i=0;i<blocksX.length;i++){
                 const pp=checkRectCircleCollision({x:this.x,y:this.y,r:15},{x:blocksX[i],y:blocksY[i],w:50,h:50});
                 if(pp.collised){
+                    now=0;
                     if(lastyyy!=i){
                         lastyyy=i;
                         let blockops=blocks.filter(a=>a.delete==0);
