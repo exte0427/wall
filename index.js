@@ -2,11 +2,17 @@ $("canvas").attr("height",window.innerHeight); //sad
 $("#point_pointer").css("top",610+"px"); 
 const blocks=[];
 let bolld=[];
+let lastbollplus=-1;
+let addbolls=[];
 let blocksX=[];
+let offset=0;
 let blocksY=[];
+let oop=15;
 let opop=40
 let mx=100,my=100;
 let fds=1;
+let ooioio=0;
+let popo=0;
 let zz=1;
 let bollNum=0;
 let patys=[];
@@ -43,11 +49,59 @@ setInterval(()=>{
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     patys.map(a=>{
         if(a.op!=0){
-            ctx.fillStyle = "#FF5451";
+            ctx.fillStyle = `#${a.color}`;
             ctx.globalAlpha = a.op;
             ctx.fillRect(a.x,a.y,a.size,a.size);
         }
     });
+    if(popo==1){
+        offset+=0.3;
+        ctx.beginPath();
+        ctx.strokeStyle="#EAEAE3";
+        ctx.lineWidth=4;
+        ctx.lineDashOffset = -offset;
+        ctx.setLineDash([20,3]);
+        ctx.moveTo(boll_start_x, 650);
+        let p=(-100/((my-650)/(mx-boll_start_x))),o=(1*100);
+        let opsd=0;
+        while(opsd==0){
+            p*=1.01;
+            o*=1.01;
+            for(let i=0;i<blocksX.length;i++){
+                if(blocksX[i]-10<boll_start_x+p && blocksX[i]+60>boll_start_x+p && blocksY[i]+60>650-o && blocksY[i]-10<650-o){
+                    opsd=1;
+                    break;
+                }
+            }
+            if(boll_start_x+p<10){
+                opsd=1;
+            }
+            if(boll_start_x+p>590){
+                opsd=1;
+            }
+            if(650-o<10){
+                opsd=1;
+            }if(650-o>650){
+                opsd=1;
+            }
+
+        }
+        p/=1.02;
+        o/=1.02;
+        ctx.lineTo(boll_start_x+(p/1.04),650-(o/1.04));
+        ctx.stroke();
+        ctx.strokeStyle="#EAEAE3";
+        ctx.beginPath();
+        ctx.arc(boll_start_x+p, 650-o, 15, 0,(Math.PI/180) *360,false);
+        //ctx.arc(x,y, 반지름, 시작각도, 종료각도, 그리는 방향);
+        //그리는 방향 : true 이면 시계 반대방향 / false 이면 시계 방향
+        ctx.lineWidth=5;
+        ctx.fillStyle = "#F8F8F4";  //채울 색상
+        //ctx.fill(); //채우기
+        ctx.stroke(); //테두리
+        ctx.strokeStyle="#333333";
+    }
+    ctx.setLineDash([]);
     ctx.globalAlpha = 1;
     if(fds==1){
         ctx.beginPath();
@@ -68,6 +122,38 @@ setInterval(()=>{
     ctx.lineTo(canvas.width-10,650);
     ctx.stroke();
     ctx.globalAlpha = 1;
+    if(ooioio==0){
+        oop+=(12-oop)/50;
+    }else{
+        oop+=(15-oop)/50;
+    }
+    addbolls.map(a=>{
+        if(a.deeeel==0){
+            ctx.beginPath();
+            ctx.arc(a.x, a.y, oop, 0,(Math.PI/180) *360,false);
+            if(Math.round(oop)==12){
+                ooioio=1;
+            }
+            if(Math.round(oop)==15){
+                ooioio=0;
+            }
+            //ctx.arc(x,y, 반지름, 시작각도, 종료각도, 그리는 방향);
+            //그리는 방향 : true 이면 시계 반대방향 / false 이면 시계 방향
+            ctx.lineWidth=5;
+            ctx.fillStyle = "#FFFEF8";  //채울 색상
+            ctx.fill(); //채우기
+            ctx.strokeStyle="#6FFAC0";
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(a.x, a.y, 8, 0,(Math.PI/180) *360,false);
+            //ctx.arc(x,y, 반지름, 시작각도, 종료각도, 그리는 방향);
+            //그리는 방향 : true 이면 시계 반대방향 / false 이면 시계 방향
+            ctx.lineWidth=5;
+            ctx.fillStyle = "#6FFAC0";  //채울 색상
+            ctx.fill(); //채우기
+        }
+    });
+    ctx.strokeStyle = "#333333";
     bolls.map(a=>{
         if(a.delete==0){
             for(let j=0;j<a.xyu.length;j++){
@@ -94,8 +180,8 @@ setInterval(()=>{
         }
     })
     blocks.map(a=>{
-        if(a.delete==0){
-            eval(drawS(a.x,a.y,a.size,a.size,10,"333333","FF5451",a.num,a.op));
+        if(a.de==0){
+            eval(drawS(a.x,a.y,a.size,a.size,10,"333333","FF5451",a.num,a.op,a.br));
             ctx.font = '28px Fredoka One';
             ctx.fillStyle = "#333333";
             ctx.textAlign = "center";
@@ -135,7 +221,6 @@ setInterval(()=>{
 },5);
 onmousemove = function(e){mx= e.clientX,my= e.clientY}
 const next=()=>{
-    bollNum++;
     const count=random(6,3);
     let ps=[];
         for(let i=0;i<blocksY.length;i++){
@@ -154,9 +239,27 @@ const next=()=>{
         blocks.push(new block(o*50));
         ps.push(blocks[blocks.length-1].x);
     }
+    let xyyy,yyyy;
+    while(true){
+        yyyy=random(0,4);
+        xyyy=random(0,11);
+        let ok=1;
+        for(let i=0;i<blocks.length;i++){
+            if(blocks[i].x==((xyyy*50)) && blocks[i].y+50==((yyyy*50))){
+                ok=0;
+            }
+        }
+        if(ok==1){
+            break;
+        }
+    }
+    addbolls.push(new add_boll((xyyy*50)+25,(yyyy*50)-25));
     blocks.map(a=>{
         a.next();
     });
+    addbolls.map(a=>{
+        a.next();
+    })
     stage++;
 }
 let mu=0;
@@ -168,9 +271,11 @@ $( "body" ).mousedown(function() {
 });
 function g(){
     if(bolld.indexOf(0)==-1){
+        popo=1;
         pp=1;
         const h=setInterval(()=>{
             if(mu==1){
+                popo=0;
                 clearInterval(h);
                 let oo=1;
                 let mmmmx=mx,mmmmy=my;
@@ -188,7 +293,7 @@ function g(){
         },100);
     }
 }
-const drawS=(x,y,w,h,r,c1,c2,num,op)=>{
+const drawS=(x,y,w,h,r,c1,c2,num,op,br)=>{
     return `var rectX = ${x};
     var rectY = ${y};
     var rectWidth = ${w};
@@ -212,7 +317,9 @@ const random=(min,max)=>{
     return Math.floor(Math.random() * (max - min)) + min;
 }
 class block{
+    br=100;
     x=0;
+    de=0;
     size=50;
     xxx=-1;
     yyy=-50;
@@ -250,20 +357,21 @@ class block{
     numM(){
         this.num--;
         if(this.num<1){
+            this.delete=1;
             this.num="";
             for(let i=0;i<10;i++){
                 patys.push(new paty(this.x+25,this.y+25));
             }
             let pp=0;
             const ui=setInterval(()=>{
-                if(pp>10){
-                    this.delete=1;
+                if(pp>9){
+                    this.de=1;
                     clearInterval(ui);
                 }
                 this.op-=0.1;
-                this.size/=1.1;
-                this.x+=1;
-                this.y+=1;
+                this.size/=1.01;
+                this.x+=0.1;
+                this.y+=0.1;
                 pp++;
                 
             },10);
@@ -404,6 +512,12 @@ class boll{
                     }
                 }
             }
+            for(let i=0;i<addbolls.length;i++){
+                if(addbolls[i].x-2<this.x && addbolls[i].x+52>this.x && addbolls[i].y+52>this.y && addbolls[i].y-2<this.y && addbolls[i].deeeel==0){
+                    addbolls[i].del();
+                    break;
+                }
+            }
             if(nmx<this.s){
                 let oo=15/(((gx-this.s)+(gy-650))/2)/5;
                 this.x+=(gx-this.s)*oo*-1*this.xl;
@@ -428,14 +542,19 @@ class paty{
     size;
     op=1;
     delete=0;
-    constructor(x,y){
+    color="FF5451";
+    constructor(x,y,color){
+        if(color!=undefined){
+            this.color=color;
+        }
         let xo=Math.random() * (5 - -5)-5;
         let yo=Math.random() * (5 - -5)-5;
         this.x=x;
         this.y=y;
         this.size=random(5,15);
         const psddsad=setInterval(()=>{
-            this.op-=0.1;
+            this.op-=0.01;
+            yo+=0.1;
             this.x+=xo;
             this.y+=yo;
             xo/=1.1;
@@ -444,7 +563,35 @@ class paty{
                 this.op=0;
                 clearInterval(psddsad);
             }
-        },50);
+        },10);
+    }
+}
+class add_boll{
+    x=0;
+    y=0;
+    deeeel=0;
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+    }
+    next(){
+        let pp=0;
+        let fy=this.y;
+        const i=setInterval(()=>{
+            if(pp==40){
+                this.y=fy+50;
+                clearInterval(i);
+            }
+            pp++;
+            this.y+=((fy+50)-this.y)/10;
+        },10)
+    }
+    del(){
+        this.deeeel=1;
+        bollNum++;
+        for(let i=0;i<10;i++){
+            patys.push(new paty(this.x,this.y,"6FF48A"));
+        }
     }
 }
 next();
