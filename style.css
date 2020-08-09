@@ -7,10 +7,12 @@ html,body{
 }
 body{
     font-family: 'Fredoka One', cursive;
-    background-color: black;
+    background-color: white;
 }
 #game{
     background-color: #FFFEF8;
+    border-radius: 0 10px 10px 0;
+    box-shadow: #F2F2F2 10px 0px 10px 0px;
 }
 #point_pointer{
     display: inline-block;
