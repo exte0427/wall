@@ -13,7 +13,7 @@ let rank_val=[];
 setInterval(()=>{
     if(mu==1){
         $.ajax({
-            url : "http://www.exlink.ml/wall/get",
+            url : "https://ex-link.herokuapp.com/wall/get",
             dataType : "jsonp",
             jsonp : "callback",
             success : function(d){
@@ -67,7 +67,7 @@ setInterval(()=>{
             }
         });
         $.ajax({
-            url : `http://www.exlink.ml/wall/post/${ips}/${score}`,
+            url : `https://ex-link.herokuapp.com/wall/post/${ips}/${score}`,
             dataType : "jsonp",
             jsonp : "callback",
         });
