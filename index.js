@@ -4,6 +4,41 @@ import("https://cdn.jsdelivr.net/gh/exte0427/betterHTML/code.js");
 const blocks=[];
 let rank=1;
 let ops=1;
+const ips=ip();
+let mu=1;
+let ranking=[];
+let rank_name=[];
+let rank_val=[];
+setInterval(()=>{
+    if(mu==1){
+        $.ajax({
+            url : "http://www.exlink.ml/wall/get",
+            dataType : "jsonp",
+            jsonp : "callback",
+            success : function(d){
+                rank_name=[];
+                rank_val=[];
+                ranking=d.data;
+                my=ranking.find(a=>a.id==ips);
+                for(let i=0;i<ranking.length;i++){
+                    let j=0;
+                    for(j=0;rank_val[j]>=ranking[i].val*1;j++){}
+                    rank_val.splice(j,0,ranking[i].val*1);
+                    rank_name.splice(j,0,ranking[i].id);
+                }
+                rank=rank_name.indexOf(my.id)+1;
+            },
+            error : function(xhr){
+                console.log("wa");
+            }
+        });
+        $.ajax({
+            url : `http://www.exlink.ml/wall/post/${ips}/${score}`,
+            dataType : "jsonp",
+            jsonp : "callback",
+        });
+    }
+},200);
 let bolld=[];
 let lastbollplus=-1;
 let addbolls=[];
@@ -312,7 +347,6 @@ const next=(a)=>{
         },450);
     }
 }
-let mu=0;
 function dopn(){
     mu=0;
 }
