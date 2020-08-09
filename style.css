@@ -11,6 +11,25 @@ html,body{
   -ms-user-select: none;
   user-select: none;
 }
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
 body{
     font-family: 'Fredoka One', cursive;
     background-color: white;
@@ -29,8 +48,24 @@ body{
     left: 240px;
     top:5px;
 }
+#rank{
+    overflow-x:hidden;
+
+    position: fixed;
+    top:120px;
+    left:620px;
+    height: calc(100% - 140px);
+    border-radius: 20px 0 0 20px ;
+    background-color: #F9F9F9;
+    width: calc(100% - 640px);
+}
 #score{
     position: fixed;
     top:0;
     left:600px;
+}
+#ranks{
+    width:100%;
+    height:100px;
+    background: linear-gradient( to right, #EEF9FD, #F9F9F9 );
 }

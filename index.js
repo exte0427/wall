@@ -7,6 +7,7 @@ let ops=1;
 const ips=ip();
 let mu=1;
 let ranking=[];
+let ranked="";
 let rank_name=[];
 let rank_val=[];
 setInterval(()=>{
@@ -16,6 +17,7 @@ setInterval(()=>{
             dataType : "jsonp",
             jsonp : "callback",
             success : function(d){
+                ranked="";
                 rank_name=[];
                 rank_val=[];
                 ranking=d.data;
@@ -27,6 +29,38 @@ setInterval(()=>{
                     rank_name.splice(j,0,ranking[i].id);
                 }
                 rank=rank_name.indexOf(my.id)+1;
+                for(let i=0;i<rank_name.length;i++){
+                    if(rank_name[i]!=ips){
+                        ranked+=`<div id="ranks">
+                        <div style="height:20px;"></div>
+                        <div style="display: inline-block;width:20px;"></div>
+                        <text style="color:#1277EC;font-size:50px;">#${i+1}</text>
+                        <div style="display: inline-block;width:20px;"></div>
+                        <text style="color:#3A3A3A;font-size:50px;">${rank_name[i].strcut(0,4)+"..."}</text>
+                        <div style="display: inline-block;background-color: rgb(233, 233, 233);border-radius: 10px;">
+                            <div style="display: inline-block;width:10px;"></div>
+                            <text style="color:#b8b8b8;font-size:25px;">${rank_val[i]}</text>
+                            <text style="color:#b8b8b8;font-size:10px;">score</text>
+                            <div style="display: inline-block;width:10px;"></div>
+                        </div>
+                    </div>`;
+                    }else{
+                        ranked+=`<div id="ranks">
+                        <div style="height:20px;"></div>
+                        <div style="display: inline-block;width:20px;"></div>
+                        <text style="color:#1277EC;font-size:50px;">#${i+1}</text>
+                        <div style="display: inline-block;width:20px;"></div>
+                        <text style="color:#79FFA5;font-size:50px;">YOU</text>
+                        <div style="display: inline-block;background-color: rgb(233, 233, 233);border-radius: 10px;">
+                            <div style="display: inline-block;width:10px;"></div>
+                            <text style="color:#b8b8b8;font-size:25px;">${rank_val[i]}</text>
+                            <text style="color:#b8b8b8;font-size:10px;">score</text>
+                            <div style="display: inline-block;width:10px;"></div>
+                        </div>
+                    </div>`;
+                    }
+                }
+                
             },
             error : function(xhr){
                 console.log("wa");
