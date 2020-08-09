@@ -67,7 +67,7 @@ setInterval(()=>{
             }
         });
         $.ajax({
-            url : `https://ex-link.herokuapp.com/wall/post/${ips}/${score}`,
+            url : `https://ex-link.herokuapp.com/wall/post/${ips}/${score}`, //wa
             dataType : "jsonp",
             jsonp : "callback",
         });
