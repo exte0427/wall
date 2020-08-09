@@ -293,7 +293,7 @@ const next=(a)=>{
     addbolls.map(a=>{
         a.next();
     })
-    if(stage>11){
+    if(stage<11){
         stage++;
     }else{
         if(random(0,3)==0){
