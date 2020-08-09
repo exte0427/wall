@@ -8,6 +8,7 @@ let blocksX=[];
 let offset=0;
 let blocksY=[];
 let oop=15;
+
 let opop=40
 let mx=100,my=100;
 let fds=1;
@@ -22,6 +23,38 @@ let border=[];
 let fd=0;
 let stage=1;
 let boll_start_x=280;
+function checkRectCircleCollision(circle, rect) {
+    let collised = null;
+    const distX = Math.abs(circle.x - rect.x - rect.w / 2);
+    const distY = Math.abs(circle.y - rect.y - rect.h / 2);
+
+    if ((distX > (rect.w / 2 + circle.r) || distY > (rect.h / 2 + circle.r)) && collised == null) collised = false;
+    if ((distX <= (rect.w / 2) || distY <= (rect.h / 2)) && collised == null) collised = true;
+
+    const dx = distX - rect.w / 2;
+    const dy = distY - rect.h / 2;
+
+    if(collised == null) collised = dx * dx + dy * dy <= ( circle.r * circle.r );
+
+    const circle_bottom = circle.y + (circle.r * 2);
+    const rect_bottom = rect.y + rect.h;
+    const circle_right = circle.x + (circle.r * 2);
+    const rect_right = rect.x + rect.w;
+
+    const b_collision = rect_bottom - circle.y;
+    const t_collision = circle_bottom - rect.y;
+    const l_collision = circle_right - rect.x;
+    const r_collision = rect_right - circle.x;
+
+    const directions = {
+        top: collised ? t_collision < b_collision && t_collision < l_collision && t_collision < r_collision : false,
+        bottom: collised ? b_collision < t_collision && b_collision < l_collision && b_collision < r_collision : false,
+        left: collised ? l_collision < r_collision && l_collision < t_collision && l_collision < b_collision : false,
+        right: collised ? r_collision < l_collision && r_collision < t_collision && r_collision < b_collision : false
+    }
+
+    return { collised, directions };
+}
 setInterval(()=>{
     if(bolld.indexOf(0)==-1 && zz==0){
         next();
@@ -260,8 +293,16 @@ const next=(a)=>{
     addbolls.map(a=>{
         a.next();
     })
-    stage++;
-    if(stage>10 && a!="wa"){
+    if(stage>11){
+        stage++;
+    }else{
+        if(random(0,3)==0){
+            stage+=2;
+        }else{
+            stage+=1;
+        }
+    }
+    if(stage>25 && a!="wa"){
         setTimeout(()=>{
             next("wa");
         },450);
@@ -496,29 +537,26 @@ class boll{
                 }
             }
             for(let i=0;i<blocksX.length;i++){
-                if(blocksX[i]-10<this.x && blocksX[i]+60>this.x && blocksY[i]+60>this.y && blocksY[i]-10<this.y){
+                const pp=checkRectCircleCollision({x:this.x,y:this.y,r:15},{x:blocksX[i],y:blocksY[i],w:50,h:50});
+                if(pp.collised){
                     if(lastyyy!=i){
                         lastyyy=i;
                         let blockops=blocks.filter(a=>a.delete==0);
                         blockops[i].numM();
-                        if(!(blocksY[i]-10<this.y-12)){
+                        if(pp.directions.top || pp.directions.bottom){
                             this.yl*=-1;
                             break;
-                        }else if(!(blocksY[i]+60>this.y+12)){
-                            this.yl*=-1;
-                            break;
-                        }else if(!(blocksX[i]-10<this.x-12)){
-                            this.xl*=-1;
-                            break;
-                        }else if(!(blocksX[i]+60>this.x+12)){
+                        }if(pp.directions.left || pp.directions.right){
                             this.xl*=-1;
                             break;
                         }
                     }
                 }
             }
+            
             for(let i=0;i<addbolls.length;i++){
-                if(addbolls[i].x-2<this.x && addbolls[i].x+52>this.x && addbolls[i].y+52>this.y && addbolls[i].y-2<this.y && addbolls[i].deeeel==0){
+                const pp=checkRectCircleCollision({x:this.x,y:this.y,r:15},{x:addbolls[i].x,y:addbolls[i].y,w:50,h:50});
+                if(pp.collised && addbolls[i].deeeel==0){
                     addbolls[i].del();
                     break;
                 }
